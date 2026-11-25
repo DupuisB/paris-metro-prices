@@ -1,0 +1,1086 @@
+{
+  "$defs": {
+    "Annotation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "entityId": {
+          "minLength": 1,
+          "title": "Entityid",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "priority": {
+          "enum": [
+            1,
+            2,
+            3
+          ],
+          "title": "Priority",
+          "type": "integer"
+        },
+        "desktop": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "mobile": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "anchor": {
+          "default": "middle",
+          "enum": [
+            "start",
+            "middle",
+            "end"
+          ],
+          "title": "Anchor",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "entityId",
+        "text",
+        "priority",
+        "desktop",
+        "mobile"
+      ],
+      "title": "Annotation",
+      "type": "object"
+    },
+    "AxisMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "xTicksDesktop": {
+          "items": {
+            "$ref": "#/$defs/AxisTick"
+          },
+          "title": "Xticksdesktop",
+          "type": "array"
+        },
+        "yTicksDesktop": {
+          "items": {
+            "$ref": "#/$defs/AxisTick"
+          },
+          "title": "Yticksdesktop",
+          "type": "array"
+        },
+        "xTicksMobile": {
+          "items": {
+            "$ref": "#/$defs/AxisTick"
+          },
+          "title": "Xticksmobile",
+          "type": "array"
+        },
+        "yTicksMobile": {
+          "items": {
+            "$ref": "#/$defs/AxisTick"
+          },
+          "title": "Yticksmobile",
+          "type": "array"
+        },
+        "xLabel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Xlabel"
+        },
+        "yLabel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ylabel"
+        }
+      },
+      "title": "AxisMeta",
+      "type": "object"
+    },
+    "AxisTick": {
+      "additionalProperties": false,
+      "properties": {
+        "pos": {
+          "title": "Pos",
+          "type": "number"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pos",
+        "label"
+      ],
+      "title": "AxisTick",
+      "type": "object"
+    },
+    "Beat": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "mode": {
+          "default": "map",
+          "enum": [
+            "map",
+            "peripherique",
+            "line1",
+            "cliffs",
+            "scatter",
+            "contrast",
+            "explore"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "kicker": {
+          "minLength": 1,
+          "title": "Kicker",
+          "type": "string"
+        },
+        "headline": {
+          "minLength": 1,
+          "title": "Headline",
+          "type": "string"
+        },
+        "bodySegments": {
+          "items": {
+            "$ref": "#/$defs/TextSegment"
+          },
+          "minItems": 1,
+          "title": "Bodysegments",
+          "type": "array"
+        },
+        "takeaway": {
+          "minLength": 1,
+          "title": "Takeaway",
+          "type": "string"
+        },
+        "chartSubtitle": {
+          "minLength": 1,
+          "title": "Chartsubtitle",
+          "type": "string"
+        },
+        "mobileSubtitle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mobilesubtitle"
+        },
+        "axisMeta": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AxisMeta"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "entities": {
+          "items": {
+            "$ref": "#/$defs/EntityState"
+          },
+          "minItems": 1,
+          "title": "Entities",
+          "type": "array"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/Annotation"
+          },
+          "title": "Annotations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "index",
+        "kicker",
+        "headline",
+        "bodySegments",
+        "takeaway",
+        "chartSubtitle",
+        "entities",
+        "annotations"
+      ],
+      "title": "Beat",
+      "type": "object"
+    },
+    "CliffItem": {
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "line": {
+          "title": "Line",
+          "type": "string"
+        },
+        "highId": {
+          "title": "Highid",
+          "type": "string"
+        },
+        "lowId": {
+          "title": "Lowid",
+          "type": "string"
+        },
+        "highName": {
+          "title": "Highname",
+          "type": "string"
+        },
+        "lowName": {
+          "title": "Lowname",
+          "type": "string"
+        },
+        "highPpm": {
+          "title": "Highppm",
+          "type": "integer"
+        },
+        "lowPpm": {
+          "title": "Lowppm",
+          "type": "integer"
+        },
+        "diffEur": {
+          "title": "Diffeur",
+          "type": "integer"
+        },
+        "pctDrop": {
+          "title": "Pctdrop",
+          "type": "number"
+        },
+        "kind": {
+          "enum": [
+            "border",
+            "seine",
+            "intra"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "desktopY": {
+          "title": "Desktopy",
+          "type": "number"
+        },
+        "mobileY": {
+          "title": "Mobiley",
+          "type": "number"
+        },
+        "highXDesktop": {
+          "title": "Highxdesktop",
+          "type": "number"
+        },
+        "lowXDesktop": {
+          "title": "Lowxdesktop",
+          "type": "number"
+        },
+        "highXMobile": {
+          "title": "Highxmobile",
+          "type": "number"
+        },
+        "lowXMobile": {
+          "title": "Lowxmobile",
+          "type": "number"
+        }
+      },
+      "required": [
+        "rank",
+        "line",
+        "highId",
+        "lowId",
+        "highName",
+        "lowName",
+        "highPpm",
+        "lowPpm",
+        "diffEur",
+        "pctDrop",
+        "kind",
+        "desktopY",
+        "mobileY",
+        "highXDesktop",
+        "lowXDesktop",
+        "highXMobile",
+        "lowXMobile"
+      ],
+      "title": "CliffItem",
+      "type": "object"
+    },
+    "ContrastItem": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "group": {
+          "enum": [
+            "prime",
+            "outer"
+          ],
+          "title": "Group",
+          "type": "string"
+        },
+        "studioPpm": {
+          "title": "Studioppm",
+          "type": "integer"
+        },
+        "largePpm": {
+          "title": "Largeppm",
+          "type": "integer"
+        },
+        "premPct": {
+          "title": "Prempct",
+          "type": "number"
+        },
+        "desktopY": {
+          "title": "Desktopy",
+          "type": "number"
+        },
+        "mobileY": {
+          "title": "Mobiley",
+          "type": "number"
+        },
+        "studioXDesktop": {
+          "title": "Studioxdesktop",
+          "type": "number"
+        },
+        "largeXDesktop": {
+          "title": "Largexdesktop",
+          "type": "number"
+        },
+        "studioXMobile": {
+          "title": "Studioxmobile",
+          "type": "number"
+        },
+        "largeXMobile": {
+          "title": "Largexmobile",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "group",
+        "studioPpm",
+        "largePpm",
+        "premPct",
+        "desktopY",
+        "mobileY",
+        "studioXDesktop",
+        "largeXDesktop",
+        "studioXMobile",
+        "largeXMobile"
+      ],
+      "title": "ContrastItem",
+      "type": "object"
+    },
+    "EntityState": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "category": {
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "radius": {
+          "exclusiveMinimum": 0,
+          "title": "Radius",
+          "type": "number"
+        },
+        "tone": {
+          "enum": [
+            "neutral",
+            "accent",
+            "secondary",
+            "tertiary"
+          ],
+          "title": "Tone",
+          "type": "string"
+        },
+        "opacity": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Opacity",
+          "type": "number"
+        },
+        "desktop": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "mobile": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "meta": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StationMeta"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "category",
+        "value",
+        "radius",
+        "tone",
+        "opacity",
+        "desktop",
+        "mobile"
+      ],
+      "title": "EntityState",
+      "type": "object"
+    },
+    "Line1Guide": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "desktopX": {
+          "title": "Desktopx",
+          "type": "number"
+        },
+        "mobileX": {
+          "title": "Mobilex",
+          "type": "number"
+        }
+      },
+      "required": [
+        "label",
+        "desktopX",
+        "mobileX"
+      ],
+      "title": "Line1Guide",
+      "type": "object"
+    },
+    "MetroEdge": {
+      "additionalProperties": false,
+      "properties": {
+        "a": {
+          "title": "A",
+          "type": "string"
+        },
+        "b": {
+          "title": "B",
+          "type": "string"
+        },
+        "line": {
+          "title": "Line",
+          "type": "string"
+        },
+        "diffEur": {
+          "title": "Diffeur",
+          "type": "integer"
+        },
+        "pctDrop": {
+          "title": "Pctdrop",
+          "type": "number"
+        },
+        "isPeripherique": {
+          "title": "Isperipherique",
+          "type": "boolean"
+        },
+        "isRisingOrFlat": {
+          "default": false,
+          "title": "Isrisingorflat",
+          "type": "boolean"
+        },
+        "desktop": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Desktop",
+          "type": "array"
+        },
+        "mobile": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Mobile",
+          "type": "array"
+        },
+        "desktopZoom": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Desktopzoom",
+          "type": "array"
+        },
+        "mobileZoom": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Mobilezoom",
+          "type": "array"
+        }
+      },
+      "required": [
+        "a",
+        "b",
+        "line",
+        "diffEur",
+        "pctDrop",
+        "isPeripherique",
+        "desktop",
+        "mobile",
+        "desktopZoom",
+        "mobileZoom"
+      ],
+      "title": "MetroEdge",
+      "type": "object"
+    },
+    "ParisContext": {
+      "additionalProperties": false,
+      "properties": {
+        "arrondissementPathsDesktop": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Arrondissementpathsdesktop",
+          "type": "array"
+        },
+        "arrondissementPathsMobile": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Arrondissementpathsmobile",
+          "type": "array"
+        },
+        "arrondissementPathsDesktopZoom": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Arrondissementpathsdesktopzoom",
+          "type": "array"
+        },
+        "arrondissementPathsMobileZoom": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Arrondissementpathsmobilezoom",
+          "type": "array"
+        },
+        "stationsById": {
+          "additionalProperties": {
+            "$ref": "#/$defs/StationMeta"
+          },
+          "title": "Stationsbyid",
+          "type": "object"
+        },
+        "metroEdges": {
+          "items": {
+            "$ref": "#/$defs/MetroEdge"
+          },
+          "title": "Metroedges",
+          "type": "array"
+        },
+        "line1OrderedIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Line1Orderedids",
+          "type": "array"
+        },
+        "line1Guides": {
+          "items": {
+            "$ref": "#/$defs/Line1Guide"
+          },
+          "title": "Line1Guides",
+          "type": "array"
+        },
+        "topCliffs": {
+          "items": {
+            "$ref": "#/$defs/CliffItem"
+          },
+          "title": "Topcliffs",
+          "type": "array"
+        },
+        "contrastItems": {
+          "items": {
+            "$ref": "#/$defs/ContrastItem"
+          },
+          "title": "Contrastitems",
+          "type": "array"
+        },
+        "scatterTrend": {
+          "$ref": "#/$defs/ScatterTrend"
+        },
+        "rentControlNote": {
+          "title": "Rentcontrolnote",
+          "type": "string"
+        },
+        "totalCleanSales": {
+          "title": "Totalcleansales",
+          "type": "integer"
+        },
+        "totalAdjacentLinks": {
+          "title": "Totaladjacentlinks",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "arrondissementPathsDesktop",
+        "arrondissementPathsMobile",
+        "arrondissementPathsDesktopZoom",
+        "arrondissementPathsMobileZoom",
+        "stationsById",
+        "metroEdges",
+        "line1OrderedIds",
+        "line1Guides",
+        "topCliffs",
+        "contrastItems",
+        "scatterTrend",
+        "rentControlNote",
+        "totalCleanSales",
+        "totalAdjacentLinks"
+      ],
+      "title": "ParisContext",
+      "type": "object"
+    },
+    "PointPosition": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "PointPosition",
+      "type": "object"
+    },
+    "ScatterTrend": {
+      "additionalProperties": false,
+      "properties": {
+        "r": {
+          "title": "R",
+          "type": "number"
+        },
+        "slopePer1k": {
+          "title": "Slopeper1K",
+          "type": "number"
+        },
+        "zeroCrossingEur": {
+          "title": "Zerocrossingeur",
+          "type": "integer"
+        },
+        "desktopStart": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "desktopEnd": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "mobileStart": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "mobileEnd": {
+          "$ref": "#/$defs/PointPosition"
+        },
+        "zeroYDesktop": {
+          "title": "Zeroydesktop",
+          "type": "number"
+        },
+        "zeroYMobile": {
+          "title": "Zeroymobile",
+          "type": "number"
+        },
+        "zeroXDesktop": {
+          "title": "Zeroxdesktop",
+          "type": "number"
+        },
+        "zeroXMobile": {
+          "title": "Zeroxmobile",
+          "type": "number"
+        }
+      },
+      "required": [
+        "r",
+        "slopePer1k",
+        "zeroCrossingEur",
+        "desktopStart",
+        "desktopEnd",
+        "mobileStart",
+        "mobileEnd",
+        "zeroYDesktop",
+        "zeroYMobile",
+        "zeroXDesktop",
+        "zeroXMobile"
+      ],
+      "title": "ScatterTrend",
+      "type": "object"
+    },
+    "StationMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "lines": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Lines",
+          "type": "array"
+        },
+        "dept": {
+          "title": "Dept",
+          "type": "string"
+        },
+        "salesCount": {
+          "minimum": 0,
+          "title": "Salescount",
+          "type": "integer"
+        },
+        "medianPpm": {
+          "exclusiveMinimum": 0,
+          "title": "Medianppm",
+          "type": "integer"
+        },
+        "studioPpm": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Studioppm"
+        },
+        "largePpm": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Largeppm"
+        },
+        "studioPremPct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Studioprempct"
+        },
+        "studioCount": {
+          "minimum": 0,
+          "title": "Studiocount",
+          "type": "integer"
+        },
+        "largeCount": {
+          "minimum": 0,
+          "title": "Largecount",
+          "type": "integer"
+        },
+        "steepestCliffEur": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Steepestcliffeur"
+        },
+        "steepestCliffNeighbor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Steepestcliffneighbor"
+        },
+        "steepestCliffLine": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Steepestcliffline"
+        },
+        "isPeripheriqueEdge": {
+          "default": false,
+          "title": "Isperipheriqueedge",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "lines",
+        "dept",
+        "salesCount",
+        "medianPpm",
+        "studioCount",
+        "largeCount"
+      ],
+      "title": "StationMeta",
+      "type": "object"
+    },
+    "TextSegment": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "tone": {
+          "anyOf": [
+            {
+              "enum": [
+                "accent",
+                "secondary",
+                "tertiary"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tone"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "TextSegment",
+      "type": "object"
+    },
+    "ViewBox": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "title": "ViewBox",
+      "type": "object"
+    },
+    "ViewBoxes": {
+      "additionalProperties": false,
+      "properties": {
+        "desktop": {
+          "$ref": "#/$defs/ViewBox"
+        },
+        "mobile": {
+          "$ref": "#/$defs/ViewBox"
+        }
+      },
+      "required": [
+        "desktop",
+        "mobile"
+      ],
+      "title": "ViewBoxes",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "slug": {
+      "minLength": 1,
+      "title": "Slug",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "dek": {
+      "minLength": 1,
+      "title": "Dek",
+      "type": "string"
+    },
+    "byline": {
+      "minLength": 1,
+      "title": "Byline",
+      "type": "string"
+    },
+    "viewBoxes": {
+      "$ref": "#/$defs/ViewBoxes"
+    },
+    "parisContext": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ParisContext"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "beats": {
+      "items": {
+        "$ref": "#/$defs/Beat"
+      },
+      "minItems": 1,
+      "title": "Beats",
+      "type": "array"
+    }
+  },
+  "required": [
+    "slug",
+    "title",
+    "dek",
+    "byline",
+    "viewBoxes",
+    "beats"
+  ],
+  "title": "StoryData",
+  "type": "object"
+}
